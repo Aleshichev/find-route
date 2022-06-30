@@ -26,7 +26,7 @@
 </div>
 
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination justify-content-center">
     <li class="page-item">
             {% if page_obj.has_previous %}
                   <a class="page-link"href="?page={{ page_obj.previous_page_number }}" arial-label="Previous">
@@ -36,19 +36,26 @@
 
     </li>
       {% for page in page_obj.paginator.page_range%}
-          <li class="page-item"><a class="page-link" href="?page={{page}}">{{ page}}</a></li>
 
+          <li class="page-item {% if page == page_obj.number %} active {% endif %}">
+              <a class="page-link" href="?page={{page}}">
+                  {{ page }}
+              </a>
+          </li>
       {% endfor %}
+
     <li class="page-item">
         {% if page_obj.has_next %}
-            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}arial-label="Next">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" arial-label="Next">
         <span aria-hidden="true">&raquo;</span></a>
         {% endif %}
     </li>
   </ul>
 </nav>
+
 <div class="row">
-    <div class="col-md-4"><form action="" method="post">{% csrf_token %}
+    <div class="col-md-4">
+        <form action="{% url 'cities:create'%}" method="post">{% csrf_token %}
 
     {{ form.as_p }}
     <input type="submit" value="Submit">
