@@ -35,6 +35,7 @@ class Train(models.Model):
         #Train = self.__class__
         if qs.exists():
             raise ValidationError('Измените время пути')
+
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
