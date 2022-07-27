@@ -51,11 +51,7 @@ class TrainDeleteView(DeleteView):
     model = Train
     template_name = 'trains/delete.html'
     success_url = reverse_lazy('trains:home')
-    # messages.success(request, 'Город успешно удалён')
-    #
-    # def get(self, request, *args, **kwargs):
-    #
-    #     return self.post(request, *args, **kwargs)
+    success_message = "Поезд успешно удалён"
 
 
 
