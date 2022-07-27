@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
 # Create your views here.
+from routes.models import Route
 from routes.utils import get_routes
 from trains.models import Train
 
@@ -65,3 +67,11 @@ def save_route(request):
         messages.error(request, 'Невозможно сохранить несуществующий маршрут')
         return redirect('/')
 
+class RouteistView(ListView):
+    paginate_by = 3
+    model = Route
+    template_name = 'routes/list.html'
+
+class RouteDetailView(DetailView):
+    queryset = Route.objects.all()
+    template_name = 'routes/detail.html'
