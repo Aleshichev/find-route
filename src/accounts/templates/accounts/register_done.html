@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Форма входа {% endblock %}
+{% block content %}
+<h1>Преветствуем Вас! {{ new_user.username }}</h1>
+
+<p>Пользователь зарегистрирован. Теперь вы можете <a href="{% url 'accounts:login' %}">войти</a></p>
+
+
+{% endblock %}
