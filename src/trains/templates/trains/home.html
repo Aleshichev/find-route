@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Список поездов {% endblock %}
+{% block title %} Список потягів {% endblock %}
 {% block content %}
-<h1>Список поездов</h1>
+<h1>Список потягів</h1>
 <div class="row">
     <div class="col-md-8 mx-auto my-5">
         <table class="table table-striped">
             <tr>
                 <th>Номер</th>
-                <th>Откуда</th>
-                <th>Куда</th>
-                <th>Время в пути</th>
+                <th>Звідки</th>
+                <th>Куди</th>
+                <th>Час в дорозі</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
@@ -24,10 +24,10 @@
                 {% if user.is_authenticated %}
                 <td>
                     <a href="{% url 'trains:update' pk=object.pk %}">
-                             <button type="submit" class="btn btn-primary">Редактировать</button></a>
+                             <button type="submit" class="btn btn-primary">Редагувати</button></a>
      </td>
                 <td>                    <a href="{% url 'trains:delete' pk=object.pk %}">
-                             <button type="submit" class="btn btn-danger">Удалить</button></a>
+                             <button type="submit" class="btn btn-danger">Видалити</button></a>
 </td>
                 {% else %}
                  <td>&nbsp;</td>

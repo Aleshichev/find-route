@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Город {% endblock %}
+{% block title %} Місто {% endblock %}
 {% block content %}
-<h1>Город</h1>
+<h1>Місто</h1>
 <div class="row">
     <div class="col-md">
              <table class="table table-striped">
             <tr>
                 <th>Номер</th>
-                <th>Откуда</th>
-                <th>Куда</th>
-                <th>Время в пути</th>
+                <th>Звідки</th>
+                <th>Куди</th>
+                <th>Час в дорозі</th>
 
             </tr>
             <tr>
@@ -26,7 +26,7 @@
     <div class="col-md-4">
         <a href="{% url 'trains:home'%}">
             <buton type="button" class="btn btn-light">
-                Назад к списку
+                Назад до списку
             </buton>
         </a>
     </div>

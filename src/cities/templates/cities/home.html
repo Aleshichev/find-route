@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %} Список городов {% endblock %}
+{% block title %} Список міст {% endblock %}
 {% block content %}
-<h1>Список городов</h1>
+<h1>Список міст</h1>
 <div class="row">
     <div class="col-md-8 mx-auto my-5">
         <table class="table table-striped">
@@ -14,11 +14,11 @@
 
                 <td>
                       <a href="{% url 'cities:update' pk=object.pk %}">
-                             <button type="submit" class="btn btn-primary">Редактировать</button></a>
+                             <button type="submit" class="btn btn-primary">Редагувати</button></a>
                 </td>
                 <td>
                      <a href="{% url 'cities:delete' pk=object.pk %}">
-                             <button type="submit" class="btn btn-danger">Удалить</button></a>
+                             <button type="submit" class="btn btn-danger">Видалити</button></a>
 
                 </td>
                         {% else %}
@@ -64,7 +64,7 @@
         <form action="{% url 'cities:create' %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-    <input type="submit" value="Сохранить">
+    <input type="submit" value="Зберегти">
 </form>
     </div>
 </div>

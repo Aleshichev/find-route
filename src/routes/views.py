@@ -8,7 +8,6 @@ from django.views.generic import ListView, DetailView, DeleteView
 
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
-# Create your views here.
 from routes.models import Route
 from routes.utils import get_routes
 from trains.models import Train
