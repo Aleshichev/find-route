@@ -31,7 +31,7 @@ def find_routes(request):
         return render(request, 'routes/home.html', {'form': form})
     else:
         form = RouteForm()
-        messages.error(request, 'Нет данных для поиска')
+        messages.error(request, 'Немаэ данних для пошуку')
         return render(request, 'routes/home.html', {'form': form})
 
 
@@ -56,7 +56,7 @@ def add_route(request):
             context['form'] = form
         return render(request, 'routes/create.html', context)
     else:
-        messages.error(request, 'Невозможно сохранить несуществующий маршрут')
+        messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
         return redirect('/')
 
 def save_route(request):
@@ -64,11 +64,11 @@ def save_route(request):
         form = RouteModelForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Маршрут успешно сохранён')
+            messages.success(request, 'Маршрут вдало збережено')
             return redirect('/')
         return render(request, 'routes/create.html', {'form': form})
     else:
-        messages.error(request, 'Невозможно сохранить несуществующий маршрут')
+        messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
         return redirect('/')
 
 class RouteistView(ListView):
@@ -85,7 +85,7 @@ class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('home')
-    success_message = "Маршрут успешно удалён"
+    success_message = "Маршрут вдало видалено"
     #
     # def get(self, request, *args, **kwargs):
     #     return self.post(request, *args, **kwargs)
