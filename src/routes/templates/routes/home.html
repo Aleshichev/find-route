@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block title %} Пошук маршруту {% endblock %}
 {% block content %}
+{% load static %}
+
 <h1>Пошук маршруту</h1>
+<br>
 <div class="row">
-    <div class="col-md-8 mx-auto">
-        {% if routes %}
-            <h3>Маршрут{% if routes|length > 1 %}ы{% endif %} з г. {{ cities.from_city.name }} у г. {{ cities.to_city.name }} </h3>
+ {% if routes %}
+    <div class="col-md-6 col-xs-12 mx-auto">
+
+            <h3>Маршрут{% if routes|length > 1 %}и{% endif %} з г. {{ cities.from_city.name }} у г. {{ cities.to_city.name }} </h3>
         <br>
         {% for route in routes %}
         <form action="{% url 'add_route'%}" method="post"> {% csrf_token %}
@@ -36,11 +40,32 @@
             </form>
         <br><br>
              {% endfor %}
-        {% endif %}
     </div>
-</div>
+            <div class="col-md-6 col-xs-12 mx-auto">
+                <img src="{% static 'Ukrz.png' %}"  class="img-fluid" alt="Ukrzal" >
+                <div class="col-md-10 col-xs-12 mx-auto">
+                    <br>
+                            {% url 'find_routes' as action %}
+                    {% include 'form.html' with button='Знайти' action=action %}
+                </div>
+            </div>
+    {% else %}
+     <div class="col-md-6 col-xs-12 mx-auto">
+
 {% url 'find_routes' as action %}
 {% include 'form.html' with button='Знайти' action=action %}
+     </div>
+                <div class="col-md-6 col-xs-12 mx-auto">
+                <img src="{% static 'Ukrz.png' %}"  class="img-fluid" alt="Ukrzal" >
+                </div>
+     {% endif %}
+</div>
+
+
+
+
+
+
 
 
 

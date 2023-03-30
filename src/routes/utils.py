@@ -1,55 +1,22 @@
 from trains.models import Train
-# {21: {22}, 22: {24, 26}, 25: {23}, 18: {24, 25}, 2: {18, 22}, 26: {2}, 28: {2}}
 
 
-def dfs_paths(graph, start, goal):
-    """ищет набор всех возможных маршрутов/ возвращает генератор"""
-    stack = [(start,[start])]
-    while stack:
-        (vertex, path) = stack.pop()
-        if vertex in graph.keys():
-            for next_ in graph[vertex] - set(path):
-              if next_ == goal:
-                  yield path + [next_]
-              else:
-                  stack.append((next_, path + [next_]))
-
-def get_graph(qs):
-    """функция создаёт граф"""
-    graph = {}
-    for q in qs:
-        graph.setdefault(q.from_city_id, set())    # значение из какого города идёт поезд если такой ключ не существует
-        graph[q.from_city_id].add(q.to_city_id)    # добавляем куда приедет поезд
-    return graph
-
-
-def get_routes(request, form) -> dict:
-    context = {'form': form}
-    qs = Train.objects.all().select_related('from_city', 'to_city')   # список всех поездов из бд
-    graph = get_graph(qs)
-    data = form.cleaned_data      # берём значения из функции
-    from_city = data['from_city']
-    to_city = data['to_city']
-    cities = data['cities']
-    travelling_time = data['travelling_time']
-    all_ways = list(dfs_paths(graph, from_city.id, to_city.id))    #все возможные пути
-    if not len(all_ways):
-        raise ValueError('Маршрута, удовлетворяющего условиям не существует')
-    if cities:
-        _cities = [city.id for city in cities]
-        right_ways = []
-        for route in all_ways:
-            if all(city in route for city in _cities):
-                right_ways.append(route)      # добавляет город в список если это возможно
-            if not right_ways:
-                raise ValueError('Маршрут через эти города не возможен')
+def sort_routes(routes):
+    sorted_routes = []
+    if len(routes) == 1:
+        sorted_routes = routes
     else:
-        right_ways = all_ways
+        times = list(set(r['total_time'] for r in routes))
+        times = sorted(times)
+        for time in times:
+            for route in routes:
+                if time == route['total_time']:
+                    sorted_routes.append(route)
+    return sorted_routes
+
+
+def find_route_total_time(right_ways, all_trains, travelling_time):
     routes = []
-    all_trains = {}
-    for q in qs:
-        all_trains.setdefault((q.from_city_id, q.to_city_id), [])
-        all_trains[q.from_city_id, q.to_city_id].append(q)
     for route in right_ways:
         tmp = {}
         tmp['trains'] = []
@@ -63,17 +30,78 @@ def get_routes(request, form) -> dict:
         if total_time <= travelling_time:
             routes.append(tmp)
     if not routes:
-        raise ValueError('Время в пути больше заданного. Увеличьте время')
-    sorted_routes = []
-    if len(routes) == 1:
-        sorted_routes = routes
+        raise ValueError('Час у дорозі більше заданого. Збільшити час')
+    return routes
+
+
+def find_all_trains(qs):
+    all_trains = {}
+    for q in qs:
+        all_trains.setdefault((q.from_city_id, q.to_city_id), [])
+        all_trains[q.from_city_id, q.to_city_id].append(q)
+    return all_trains
+
+
+def search_ways(all_ways, cities):
+    if cities:
+        _cities = [city.id for city in cities]
+        right_ways = []
+        for route in all_ways:
+            if all(city in route for city in _cities):
+                right_ways.append(route)
+        if not right_ways:
+            raise ValueError('Маршрут через ці міста неможливий')
+        return right_ways
     else:
-        times = list(set(r['total_time'] for r in routes))
-        times = sorted(times)
-        for time in times:
-            for route in routes:
-                if time == route['total_time']:
-                    sorted_routes.append(route)
+        right_ways = all_ways
+        return right_ways
+
+
+def dfs_paths(graph, start, goal):
+    """ищет набор всех возможных маршрутов"""
+    stack = [(start,[start])]
+    while stack:
+        (vertex, path) = stack.pop()
+        if vertex in graph.keys():
+            for next_ in graph[vertex] - set(path):
+              if next_ == goal:
+                  yield path + [next_]
+              else:
+                  stack.append((next_, path + [next_]))
+
+
+def get_graph(qs):
+
+    graph = {}
+    for q in qs:
+        graph.setdefault(q.from_city_id, set())
+        graph[q.from_city_id].add(q.to_city_id)
+    return graph
+
+
+def get_routes(request, form) -> dict:
+    context = {'form': form}
+    qs = Train.objects.all().select_related('from_city', 'to_city')
+
+    graph = get_graph(qs)
+    data = form.cleaned_data
+    from_city = data['from_city']
+    to_city = data['to_city']
+    cities = data['cities']
+    travelling_time = data['travelling_time']
+
+    all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
+    if not len(all_ways):
+        raise ValueError('Маршруту, що задовольняє умовам не існує')
+
+    right_ways = search_ways(all_ways, cities)
+
+    all_trains = find_all_trains(qs)
+
+    routes = find_route_total_time(right_ways, all_trains, travelling_time)
+
+    sorted_routes = sort_routes(routes)
     context['routes'] = sorted_routes
     context['cities'] = {'from_city': from_city, 'to_city': to_city}
+
     return context

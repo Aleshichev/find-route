@@ -3,6 +3,7 @@ from cities.models import City
 from routes.models import Route
 from trains.models import Train
 
+
 class RouteForm(forms.Form):
     from_city = forms.ModelChoiceField(label='Звідки', queryset=City.objects.all(),
                                        widget=forms.Select(attrs={'class': 'form-control js-example-basic-single'}

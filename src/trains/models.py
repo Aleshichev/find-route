@@ -1,7 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-# Create your models here.
 from cities.models import City
 
 
@@ -9,11 +8,11 @@ class Train(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Номер потягу")
 
     travel_time = models.PositiveSmallIntegerField(verbose_name='Час в дорозі')
-    from_city = models.ForeignKey(City,on_delete=models.CASCADE,
+    from_city = models.ForeignKey(City, on_delete=models.CASCADE,
                                   related_name='from_city_set',
                                   verbose_name='З якого міста'
                                   )
-    to_city = models.ForeignKey('cities.City',on_delete=models.CASCADE,
+    to_city = models.ForeignKey('cities.City', on_delete=models.CASCADE,
                                   related_name='to_city_set',
                                   verbose_name='В яке місто'
                                   )
@@ -24,7 +23,7 @@ class Train(models.Model):
     class Meta:
         verbose_name = 'Потяг'
         verbose_name_plural = 'Поїзди'
-        ordering = ['travel_time']
+        ordering = ['from_city']
 
     def clean(self):
         """Предварительная проверка данных"""
@@ -40,10 +39,3 @@ class Train(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
-
-class TrainTest(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name="Номер потягу")
-    from_city = models.ForeignKey(City,on_delete=models.CASCADE,
-                                  related_name='from_city',
-                                  verbose_name='З якого  міста'
-                                  )

@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 {% block title %} Створення поїзда {% endblock %}
 {% block content %}
+{% load static %}
 <h1>Створення поїзда</h1>
-
+<br>
+<div class="row">
+        <div class="col-md-6 col-xs-12">
 {% include 'form.html' with button='Зберегти' %}
+        </div>
 
+        <div class="col-md-6 col-xs-12 ">
+                <img src="{% static 'Ukrz.png' %}"  class="img-fluid" alt="Ukrzal" >
+        </div>
 
-
+</div>
 {% endblock %}

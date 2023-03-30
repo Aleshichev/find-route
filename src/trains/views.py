@@ -1,30 +1,14 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
-from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
 from trains.forms import TrainForm
 from trains.models import Train
 
-__all__=(
-    'home', 'TrainListView',
-    'TrainDetailView',
-    'TrainCreateView', 'TrainUpdateView', 'TrainDeleteView',
-)
-def home(request, pk=None):
-    qs = Train.objects.all()
-    lst = Paginator(qs, 2)
-    page_number = request.GET.get('page')
-    page_obj = lst.get_page(page_number)
-    context = {'page_obj': page_obj,}
-    return render(request, 'trains/home.html', context)
 
 class TrainListView(ListView):
-    paginate_by = 3
+    paginate_by = 10
     model = Train
     template_name = 'trains/home.html'
 
