@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block title %} Форма входу {% endblock %}
 {% block content %}
+{% load static %}
+
 <h1>Вітаємо! {{ new_user.username }}</h1>
 
-<p>Користувач зареєстрований. Тепер ви можете <a href="{% url 'accounts:login' %}">увійти</a></p>
+<br>
 
+<div class="row">
+<div class="col-md-6 col-xs-12 mx-auto">
 
+<p>Користувач зареєстрований. Тепер ви можете <a href="{% url 'accounts:login' %}">увійти</a></p></div>
+            <div class="col-md-6 col-xs-12 mx-auto">
+            <img src="{% static 'Ukrz.png' %}"  class="img-fluid" alt="Ukrzal" >
+            </div>
+</div>
+</div>
 {% endblock %}

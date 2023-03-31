@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import check_password
-from django.core.exceptions import ValidationError
+
 
 User = get_user_model()
 
@@ -52,4 +52,4 @@ class UserRegistrationForm(forms.ModelForm):
         data = self.cleaned_data
         if data['password'] != data['password2']:
             raise forms.ValidationError('Різні паролі')
-        return
+        return data['password2']

@@ -13,12 +13,12 @@ from routes.utils import get_routes
 from trains.models import Train
 
 
-@login_required
 def home(request):
     form = RouteForm()
     return render(request, 'routes/home.html', {'form': form})
 
 
+@login_required
 def find_routes(request):
     if request.method == "POST":
         form = RouteForm(request.POST)
@@ -72,7 +72,7 @@ def save_route(request):
         messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
         return redirect('/')
 
-class RouteistView(ListView):
+class RouteListView(ListView):
     paginate_by = 3
     model = Route
     template_name = 'routes/list.html'
@@ -87,6 +87,3 @@ class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('home')
     success_message = "Маршрут вдало видалено"
-    #
-    # def get(self, request, *args, **kwargs):
-    #     return self.post(request, *args, **kwargs)
