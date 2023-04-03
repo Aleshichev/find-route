@@ -1,3 +1,4 @@
+from braces.views import CsrfExemptMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -17,7 +18,7 @@ class TrainDetailView(DetailView):
     template_name = 'trains/detail.html'
 
 
-class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class TrainCreateView(CsrfExemptMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Train
     form_class = TrainForm
     template_name = 'trains/create.html'
@@ -25,14 +26,14 @@ class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     success_message = "Потяг вдало створено"
 
 
-class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+class TrainUpdateView(CsrfExemptMixin, SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Train
     form_class = TrainForm
     template_name = 'trains/update.html'
     success_url = reverse_lazy('trains:home')
     success_message = "Потяг вдало відредаговано"
 
-class TrainDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+class TrainDeleteView(CsrfExemptMixin, SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Train
     template_name = 'trains/delete.html'
     success_url = reverse_lazy('trains:home')

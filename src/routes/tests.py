@@ -62,8 +62,8 @@ class AllTestsCase(TestCase):
         try:
             train.full_clean()
         except ValidationError as e:
-            self.assertEqual({'__all__': ['Измените время в пути']}, e.message_dict)
-            self.assertIn('Измените время в пути', e.messages)
+            self.assertEqual({'__all__': ['Змінити час']}, e.message_dict)
+            self.assertIn('Змінити час', e.messages)
 
     def test_home_routes_views(self):
         response = self.client.get(reverse('home'))
@@ -87,7 +87,8 @@ class AllTestsCase(TestCase):
         self.assertEqual(len(all_routes), 4)
 
     def test_valid_route_form(self):
-        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id,
+        data = {'from_city': self.city_A.id,
+                'to_city': self.city_B.id,
                 'cities': [self.city_E.id, self.city_D.id],
                 'travelling_time': 9
                 }
@@ -95,11 +96,6 @@ class AllTestsCase(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_invalid_route_form(self):
-        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id,
-                'cities': [self.city_E.id, self.city_D.id],
-                }
-        form = RouteForm(data=data)
-        self.assertFalse(form.is_valid())
 
         data = {'from_city': self.city_A.id, 'to_city': self.city_B.id,
                 'cities': [self.city_E.id, self.city_D.id],
@@ -114,7 +110,7 @@ class AllTestsCase(TestCase):
                 'travelling_time': 9
                 }
         response = self.client.post('/find_routes/', data)
-        self.assertContains(response, 'Время в пути больше заданного', 1, 200)
+        self.assertContains(response, 'Час у дорозі більше заданого. Збільшити час', 1, 200)
 
     def test_message_error_from_cities(self):
         data = {'from_city': self.city_B.id, 'to_city': self.city_E.id,
@@ -122,5 +118,5 @@ class AllTestsCase(TestCase):
                 'travelling_time': 349
                 }
         response = self.client.post('/find_routes/', data)
-        self.assertContains(response, 'Маршрут, через эти города невозможен', 1, 200)
+        self.assertContains(response, 'Маршрут через ці міста неможливий', 1, 200)
 

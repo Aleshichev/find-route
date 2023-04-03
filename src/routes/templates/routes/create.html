@@ -8,7 +8,6 @@
       <form action="{% url 'save_route' %}" method="post">{% csrf_token %}
       {% for field in form %}
         <div class="fieldWrapper">
-            {{ field.errors }}
             {{ field }}
             {% if field.help_text %}
             <p class="help">{{ field.help_text|safe }}</p>

@@ -1,10 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-
+from django.views.decorators.csrf import csrf_exempt
 
 from accounts.forms import UserLoginForm, UserRegistrationForm
 
 
+@csrf_exempt
 def login_view(request):
     form = UserLoginForm(request.POST or None)
     _next = request.GET.get('next')
@@ -22,6 +23,8 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+
+@csrf_exempt
 def registration_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)

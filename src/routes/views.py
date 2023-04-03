@@ -5,12 +5,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
-
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
 from routes.models import Route
 from routes.utils import get_routes
 from trains.models import Train
+from django.views.decorators.csrf import csrf_exempt
+from braces.views import CsrfExemptMixin
+
+
 
 
 def home(request):
@@ -18,7 +21,8 @@ def home(request):
     return render(request, 'routes/home.html', {'form': form})
 
 
-@login_required
+@csrf_exempt
+# @login_required
 def find_routes(request):
     if request.method == "POST":
         form = RouteForm(request.POST)
@@ -35,7 +39,7 @@ def find_routes(request):
         messages.error(request, 'Немаэ данних для пошуку')
         return render(request, 'routes/home.html', {'form': form})
 
-
+@csrf_exempt
 def add_route(request):
     if request.method == "POST":
         context = {}
@@ -60,6 +64,7 @@ def add_route(request):
         messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
         return redirect('/')
 
+@csrf_exempt
 def save_route(request):
     if request.method == "POST":
         form = RouteModelForm(request.POST)
@@ -67,6 +72,8 @@ def save_route(request):
             form.save()
             messages.success(request, 'Маршрут вдало збережено')
             return redirect('/')
+        else:
+            messages.error(request, 'Маршрут з цією назвою вже існує')
         return render(request, 'routes/create.html', {'form': form})
     else:
         messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
@@ -77,12 +84,12 @@ class RouteListView(ListView):
     model = Route
     template_name = 'routes/list.html'
 
-class RouteDetailView(DetailView):
+class RouteDetailView(CsrfExemptMixin, DetailView):
     queryset = Route.objects.all()
     template_name = 'routes/detail.html'
 
 
-class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+class RouteDeleteView(CsrfExemptMixin, SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('home')
