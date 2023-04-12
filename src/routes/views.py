@@ -14,15 +14,12 @@ from django.views.decorators.csrf import csrf_exempt
 from braces.views import CsrfExemptMixin
 
 
-
-
 def home(request):
     form = RouteForm()
     return render(request, 'routes/home.html', {'form': form})
 
 
 @csrf_exempt
-# @login_required
 def find_routes(request):
     if request.method == "POST":
         form = RouteForm(request.POST)
@@ -40,6 +37,7 @@ def find_routes(request):
         return render(request, 'routes/home.html', {'form': form})
 
 @csrf_exempt
+@login_required
 def add_route(request):
     if request.method == "POST":
         context = {}

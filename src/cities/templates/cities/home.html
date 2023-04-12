@@ -10,7 +10,8 @@
                 <td>
                       <a href="{% url 'cities:detail' pk=object.pk %}">{{ object.name }}</a>
                 </td>
-                                {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+
 
                 <td>
                       <a href="{% url 'cities:update' pk=object.pk %}">
@@ -60,7 +61,7 @@
 </nav>
 
 
- {% if user.is_authenticated %}
+ {% if user.is_superuser %}
 <div class="row">
     <div class="col-md-4">
         <form action="{% url 'cities:create' %}" method="post">
