@@ -2,7 +2,7 @@
 {% block title %} Редагувати місто {% endblock %}
 {% block content %}
 <h1>Редагувати місто</h1>
-
+{% if user.is_superuser %}
 {% include 'form.html' with button='Редагувати' %}
-
+{% endif %}
 {% endblock %}

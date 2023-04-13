@@ -3,7 +3,9 @@
 {% block content %}
 <h1>Видалення маршруту</h1>
 <p>{{ object }}</p>
+{% if user.is_authenticated %}
 {% include 'form.html' with button='Видалити' %}
+{% endif %}
 
 
 

@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Видалення міста</h1>
 <p>{{ object }}</p>
+{% if user.is_superuser %}
 {% include 'form.html' with button='Видалити' %}
-
+{% endif %}
 {% endblock %}

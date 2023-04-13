@@ -77,10 +77,12 @@ def save_route(request):
         messages.error(request, 'Неможливо зберегти неіснуючий маршрут')
         return redirect('/')
 
+
 class RouteListView(ListView):
     paginate_by = 3
     model = Route
     template_name = 'routes/list.html'
+
 
 class RouteDetailView(CsrfExemptMixin, DetailView):
     queryset = Route.objects.all()

@@ -8,11 +8,11 @@ class Route(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Назва маршруту")
 
     travel_times = models.PositiveSmallIntegerField(verbose_name='Загальний час у дорозі')
-    from_city = models.ForeignKey(City,on_delete=models.CASCADE,
+    from_city = models.ForeignKey(City, on_delete=models.CASCADE,
                                   related_name='route_from_city_set',
                                   verbose_name='З якого міста'
                                   )
-    to_city = models.ForeignKey('cities.City',on_delete=models.CASCADE,
+    to_city = models.ForeignKey('cities.City', on_delete=models.CASCADE,
                                   related_name='route_to_city_set',
                                   verbose_name='В яке місто'
                                   )

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Редагування міста {% endblock %}
 {% block content %}
-<h1>Редагування міста</h1>
-
+<h1>Редагування потяга</h1>
+{% if user.is_superuser %}
 {% include 'form.html' with button='Редагувати' %}
-
+{% endif %}
 
 
 {% endblock %}

@@ -1,8 +1,16 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from rest_framework import routers
 from routes.views import home, find_routes, add_route, save_route,\
     RouteListView, RouteDetailView, RouteDeleteView
+from travel.views import TrainViewSet, CityViewSet, RouteViewSet
+
+
+router = routers.DefaultRouter()
+router.register(r'train', TrainViewSet, basename='train')
+router.register(r'route', RouteViewSet, basename='route')
+router.register(r'city', CityViewSet, basename='city')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,5 +24,5 @@ urlpatterns = [
     path('list/', RouteListView.as_view(), name='list'),
     path('detail/<int:pk>/', RouteDetailView.as_view(), name='detail'),
     path('delete/<int:pk>/', RouteDeleteView.as_view(), name='delete'),
-
+    path('api/v1/', include(router.urls)),
 ]
