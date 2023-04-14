@@ -1,0 +1,1232 @@
+openapi: 3.0.3
+info:
+  title: Django DRF Find_Route
+  version: 1.0.0
+  description: Your project description
+paths:
+  /api/v1/authusers/:
+    get:
+      operationId: v1_authusers_list
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: v1_authusers_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+          description: ''
+  /api/v1/authusers/{id}/:
+    get:
+      operationId: v1_authusers_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: v1_authusers_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: v1_authusers_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: v1_authusers_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/authusers/activation/:
+    post:
+      operationId: v1_authusers_activation_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Activation'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activation'
+          description: ''
+  /api/v1/authusers/me/:
+    get:
+      operationId: v1_authusers_me_retrieve
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: v1_authusers_me_update
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: v1_authusers_me_partial_update
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: v1_authusers_me_destroy
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/authusers/resend_activation/:
+    post:
+      operationId: v1_authusers_resend_activation_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/v1/authusers/reset_password/:
+    post:
+      operationId: v1_authusers_reset_password_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/v1/authusers/reset_password_confirm/:
+    post:
+      operationId: v1_authusers_reset_password_confirm_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirm'
+          description: ''
+  /api/v1/authusers/reset_username/:
+    post:
+      operationId: v1_authusers_reset_username_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/v1/authusers/reset_username_confirm/:
+    post:
+      operationId: v1_authusers_reset_username_confirm_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsernameResetConfirm'
+          description: ''
+  /api/v1/authusers/set_password/:
+    post:
+      operationId: v1_authusers_set_password_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPassword'
+          description: ''
+  /api/v1/authusers/set_username/:
+    post:
+      operationId: v1_authusers_set_username_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUsername'
+          description: ''
+  /api/v1/city/:
+    get:
+      operationId: v1_city_list
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cities'
+          description: ''
+    post:
+      operationId: v1_city_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cities'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cities'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cities'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cities'
+          description: ''
+  /api/v1/city/{id}/:
+    get:
+      operationId: v1_city_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Місто.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cities'
+          description: ''
+    put:
+      operationId: v1_city_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Місто.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cities'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cities'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cities'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cities'
+          description: ''
+    patch:
+      operationId: v1_city_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Місто.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCities'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCities'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCities'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cities'
+          description: ''
+    delete:
+      operationId: v1_city_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Місто.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/route/:
+    get:
+      operationId: v1_route_list
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+          description: ''
+    post:
+      operationId: v1_route_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Route'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Route'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+          description: ''
+  /api/v1/route/{id}/:
+    get:
+      operationId: v1_route_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Маршрут.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+          description: ''
+    put:
+      operationId: v1_route_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Маршрут.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Route'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Route'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+          description: ''
+    patch:
+      operationId: v1_route_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Маршрут.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRoute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRoute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRoute'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+          description: ''
+    delete:
+      operationId: v1_route_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Маршрут.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/train/:
+    get:
+      operationId: v1_train_list
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Train'
+          description: ''
+    post:
+      operationId: v1_train_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Train'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Train'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Train'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: ''
+  /api/v1/train/{id}/:
+    get:
+      operationId: v1_train_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Потяг.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: ''
+    put:
+      operationId: v1_train_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Потяг.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Train'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Train'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Train'
+        required: true
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: ''
+    patch:
+      operationId: v1_train_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Потяг.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrain'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrain'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrain'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: ''
+    delete:
+      operationId: v1_train_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Потяг.
+        required: true
+      tags:
+      - v1
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /auth/token/login/:
+    post:
+      operationId: auth_token_login_create
+      description: Use this endpoint to obtain user authentication token.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreate'
+          description: ''
+  /auth/token/logout/:
+    post:
+      operationId: auth_token_logout_create
+      description: Use this endpoint to logout user (remove user authentication token).
+      tags:
+      - auth
+      security:
+      - tokenAuth: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    Activation:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - token
+      - uid
+    Cities:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Місто
+          maxLength: 150
+      required:
+      - id
+      - name
+    PasswordResetConfirm:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        new_password:
+          type: string
+      required:
+      - new_password
+      - token
+      - uid
+    PatchedCities:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Місто
+          maxLength: 150
+    PatchedRoute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Назва маршруту
+          maxLength: 50
+        travel_times:
+          type: integer
+          title: Загальний час у дорозі
+        from_city:
+          $ref: '#/components/schemas/Cities'
+        to_city:
+          $ref: '#/components/schemas/Cities'
+        trains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Train'
+    PatchedTrain:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Номер потягу
+          maxLength: 50
+        from_city:
+          $ref: '#/components/schemas/Cities'
+        to_city:
+          $ref: '#/components/schemas/Cities'
+        travel_time:
+          type: integer
+          title: Час в дорозі
+    PatchedUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+    Route:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Назва маршруту
+          maxLength: 50
+        travel_times:
+          type: integer
+          title: Загальний час у дорозі
+        from_city:
+          $ref: '#/components/schemas/Cities'
+        to_city:
+          $ref: '#/components/schemas/Cities'
+        trains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Train'
+      required:
+      - from_city
+      - id
+      - name
+      - to_city
+      - trains
+      - travel_times
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    SetPassword:
+      type: object
+      properties:
+        new_password:
+          type: string
+        current_password:
+          type: string
+      required:
+      - current_password
+      - new_password
+    SetUsername:
+      type: object
+      properties:
+        current_password:
+          type: string
+        new_username:
+          type: string
+          title: Username
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - current_password
+      - new_username
+    TokenCreate:
+      type: object
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+    Train:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Номер потягу
+          maxLength: 50
+        from_city:
+          $ref: '#/components/schemas/Cities'
+        to_city:
+          $ref: '#/components/schemas/Cities'
+        travel_time:
+          type: integer
+          title: Час в дорозі
+      required:
+      - from_city
+      - id
+      - name
+      - to_city
+      - travel_time
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+      required:
+      - id
+      - username
+    UserCreate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - id
+      - password
+      - username
+    UsernameResetConfirm:
+      type: object
+      properties:
+        new_username:
+          type: string
+          title: Username
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - new_username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
