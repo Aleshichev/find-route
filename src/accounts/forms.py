@@ -34,7 +34,7 @@ class UserLoginForm(forms.Form):
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(label='username', widget=forms.TextInput(attrs={
         'class': 'from-control',
-        'placeholder': 'Введіть назву міста'
+        'placeholder': "Введіть ім'я"
     }))
     password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={
         'class': 'from-control',
