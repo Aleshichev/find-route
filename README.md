@@ -38,3 +38,10 @@
 
 - There is an option to include logs
 - The Routes application implements tests
+
+  ![Graph](https://github.com/Aleshichev/find-route/assets/103876050/3b9d30ba-6585-4e2f-aedf-867bb0ea438c)
+![Без имени](https://github.com/Aleshichev/find-route/assets/103876050/8089aa8d-5490-4343-99da-722533e9b9a9)
+![Без имени jpg](https://github.com/Aleshichev/find-route/assets/103876050/428a6462-1f76-4282-bee1-50195ee3ec9b)
+![test](https://github.com/Aleshichev/find-route/assets/103876050/5918c66b-1fc2-40c9-8211-13a28db52f86)
+![Swagger](https://github.com/Aleshichev/find-route/assets/103876050/2fa1ea34-7c70-411a-a457-a49084e2b247)
+
