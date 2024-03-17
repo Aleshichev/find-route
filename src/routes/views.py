@@ -33,7 +33,7 @@ def find_routes(request):
         return render(request, 'routes/home.html', {'form': form})
     else:
         form = RouteForm()
-        messages.error(request, 'Немаэ данних для пошуку')
+        messages.error(request, 'Немає данних для пошуку')
         return render(request, 'routes/home.html', {'form': form})
 
 @csrf_exempt
