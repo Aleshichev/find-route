@@ -27,3 +27,21 @@ class Route(models.Model):
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршрути'
         ordering = ['travel_times']
+        
+    # def clean(self):
+    #     """Предварительная проверка данных"""
+    #     if self.from_city == self.to_city:
+    #         raise ValidationError("Змінити місто прибуття")
+    #     qs = Train.objects.filter(
+    #         from_city=self.from_city, to_city=self.to_city, travel_time=self.travel_time
+    #     ).exclude(pk=self.pk)
+    #     # Train = self.__class__
+    #     if qs.exists() or self.travel_time <= 0:
+    #         raise ValidationError("Змінить час")
+
+    #     # if self.travel_time <= 0:
+    #     #     raise ValidationError("Змінить час")
+
+    # def save(self, *args, **kwargs):
+    #     self.clean()
+    #     super().save(*args, **kwargs)

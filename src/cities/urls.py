@@ -1,6 +1,6 @@
 from django.urls import path
 
-from cities.views import CityListView, CityCreateView, \
+from cities.views import CityListView, city_create_view, \
     CityDetailView, CityUpdateView, CityDeleteView
 
 urlpatterns = [
@@ -8,5 +8,5 @@ urlpatterns = [
     path('detail/<int:pk>/', CityDetailView.as_view(), name='detail'),
     path('update/<int:pk>/', CityUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', CityDeleteView.as_view(), name='delete'),
-    path('add/', CityCreateView.as_view(), name='create'),
+    path('add/', city_create_view, name='create'),  
 ]
