@@ -12,7 +12,8 @@ def sort_routes(routes):
             for route in routes:
                 if time == route['total_time']:
                     sorted_routes.append(route)
-    return sorted_routes
+    return sorted_routes[:5]
+    # return sorted_routes
 
 
 def find_route_total_time(right_ways, all_trains, travelling_time):
@@ -58,7 +59,7 @@ def search_ways(all_ways, cities):
 
 
 def dfs_paths(graph, start, goal):
-    """ищет набор всех возможных маршрутов"""
+    """шукає усі маршрути"""
     stack = [(start,[start])]
     while stack:
         (vertex, path) = stack.pop()
@@ -81,7 +82,9 @@ def get_graph(qs):
 
 def get_routes(request, form) -> dict:
     context = {'form': form}
+    # qs = Train.objects.all()
     qs = Train.objects.all().select_related('from_city', 'to_city')
+
 
     graph = get_graph(qs)
     data = form.cleaned_data
