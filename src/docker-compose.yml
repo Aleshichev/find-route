@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+
+  app:
+    image: backend_find_road
+    build: 
+      context: .
+    container_name: backend_road
+    command: 
+      bash "./backend_app.sh"
+    ports:
+      - $BACKEND_PORT:$BACKEND_PORT
+    env_file:
+      - .env
+    volumes:
+      - backend_data:/backend_app/static/media
+
+volumes:
+  backend_data:

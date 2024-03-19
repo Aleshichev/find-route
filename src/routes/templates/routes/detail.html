@@ -10,7 +10,7 @@
                 <th>Звідки</th>
                 <th>Куди</th>
                 <th>Час в дорозі</th>
-                <th>Список поїздів за маршрутом</th>
+                <th>Список зупионок за маршрутом</th>
                 <th>&nbsp;</th>
             </tr>
             <tr>
@@ -21,7 +21,15 @@
                 <td>{{ object.travel_times }}</td>
                 <td>
                     {% for train in object.trains.all %}
-                    <p>{{train}}, час в дорозі {{train.travel_time}}</p>
+                    <p>{{train.from_city}} - 
+                        {{train.to_city}} час в дорозі 
+                        {{train.travel_time}} 
+                        {% if train.travel_time == 1 %}година{% elif train.travel_time < 5 %}
+                            години
+                        {% else %}
+                            годин
+                        {% endif %}
+                    </p>
                     {% endfor%}
                 </td>
                     <td>

@@ -93,9 +93,14 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+# STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [BASE_DIR.joinpath('travel/static'), ]
+# STATICFILES_DIRS = [BASE_DIR.joinpath('static'), ]
+# STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+STATIC_URL = "static/"
+STATICFILES_DIRS = (BASE_DIR / "static",)
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 
 
 STATICFILES_FINDERS = [

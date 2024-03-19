@@ -79,10 +79,12 @@ def save_route(request):
 
 
 class RouteListView(ListView):
-    paginate_by = 3
+    paginate_by = 8
     model = Route
     template_name = 'routes/list.html'
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('name')
 
 class RouteDetailView(CsrfExemptMixin, DetailView):
     queryset = Route.objects.all()
