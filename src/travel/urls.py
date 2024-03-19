@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework import routers
 from routes.views import home, find_routes, add_route, save_route,\
     RouteListView, RouteDetailView, RouteDeleteView
@@ -39,3 +40,5 @@ urlpatterns = [
     path('api/schema/docs', SpectacularSwaggerView.as_view(url_name='schema')),
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()
